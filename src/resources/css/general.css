@@ -1,0 +1,30 @@
+#main{
+    -fx-background-image: url("../images/background.jpg");
+}
+
+#title{
+    -fx-background-color:  rgba(135,206,250, 0.5);
+}
+
+.text-field {
+    -fx-background-color: rgba(53,89,119,0.6);
+    -fx-text-inner-color: white;
+}
+
+.text-area {
+    -fx-background-color: rgba(53,89,119,0.6);
+    -fx-text-inner-color: white;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
