@@ -24,6 +24,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
 
         init.setTextAreasWrap(primaryStage);
+        init.setSearchFieldListener(primaryStage);
 
         primaryStage.show();
     }

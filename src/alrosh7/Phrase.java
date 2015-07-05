@@ -10,19 +10,21 @@ public class Phrase {
     private String value; // 1st field
     private String origin; //2nd field
     private String description; //3rd field
-    private String citation;
+    private String citation; //4th field
     private ArrayList<String> files;
     private String germanTranslation; //5th field
     private String frenchTranslation; //6th field
     private String uniqueID;
 
-    public Phrase(String value, String origin, String description, String citation, String germanTranslation, String frenchTranslation) {
+    public Phrase(String value, String origin, String description, String citation, String germanTranslation, String frenchTranslation, String uniqueID) {
         this.value = value;
         this.origin = origin;
         this.description = description;
         this.citation = citation;
         this.germanTranslation = germanTranslation;
         this.frenchTranslation = frenchTranslation;
+        this.uniqueID = uniqueID;
+        this.files = new ArrayList<>();
     }
 
     public String getUniqueID() {

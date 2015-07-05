@@ -1,12 +1,14 @@
 package alrosh7;
 
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
  * Created by alex on 05/07/15.
  */
 public class Init {
+
     public Init(){
 
     }
@@ -18,4 +20,10 @@ public class Init {
         originTA.setWrapText(true);
     }
 
+    public void setSearchFieldListener(Stage stage) {
+        TextField searchInputTF = (TextField) stage.getScene().lookup("#searchInput");
+        searchInputTF.textProperty().addListener((observable, oldValue, newValue) -> {
+
+        });
+    }
 }

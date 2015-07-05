@@ -22,9 +22,9 @@
          </children></Pane>
       <Pane layoutX="7.0" layoutY="132.0" prefHeight="33.0" prefWidth="960.0">
          <children>
-            <Button layoutX="886.0" layoutY="5.0" mnemonicParsing="false" onAction="#switchToTranslation" text="DE/FR" />
-            <Button layoutX="741.0" layoutY="4.0" mnemonicParsing="false" text="Ανέβασμα Αρχείων" />
-            <Button layoutX="618.0" layoutY="4.0" mnemonicParsing="false" text="Σχετικά Αρχεία" />
+            <Button layoutX="886.0" layoutY="4.0" mnemonicParsing="false" onAction="#switchToTranslation" text="DE/FR" />
+            <Button layoutX="741.0" layoutY="4.0" mnemonicParsing="false" onAction="#uploadFiles" text="Ανέβασμα Αρχείων" />
+            <Button layoutX="618.0" layoutY="4.0" mnemonicParsing="false" onAction="#viewFiles" text="Σχετικά Αρχεία" />
             <Button layoutX="515.0" layoutY="4.0" mnemonicParsing="false" text="Αποθήκευση" />
          </children>
       </Pane>
