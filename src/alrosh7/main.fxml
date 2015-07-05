@@ -14,11 +14,11 @@
    <children>
       <Pane id="title" layoutY="-2.0" prefHeight="85.0" prefWidth="960.0">
          <children>
-            <Text fill="WHITE" layoutX="19.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Άγαλμα" wrappingWidth="935.0">
+            <TextField id="searchInput" layoutX="14.0" layoutY="8.0" prefHeight="47.0" prefWidth="935.0" promptText="Αναζήτηση">
                <font>
-                  <Font size="48.0" />
+                  <Font size="37.0" />
                </font>
-            </Text>
+            </TextField>
          </children></Pane>
       <Pane layoutX="7.0" layoutY="132.0" prefHeight="33.0" prefWidth="960.0">
          <children>

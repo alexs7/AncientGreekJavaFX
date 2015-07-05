@@ -1,4 +1,5 @@
 package alrosh7;
+import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 
@@ -15,6 +16,10 @@ public class FileAction {
         if(!rootDir.exists()){
             rootDir.mkdirs();
         }
+    }
+
+    public void loadJSONFile() {
+        JSONParser parser = new JSONParser();
 
     }
 }

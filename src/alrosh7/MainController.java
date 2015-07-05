@@ -21,8 +21,12 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         init = new Init();
+
         fileAction = new FileAction();
         fileAction.createRootDir();
+
+        fileAction.loadJSONFile();
+
         //load json files here
         //do saving here
     }
