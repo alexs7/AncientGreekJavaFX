@@ -1,35 +1,68 @@
+/*rgba(16, 27, 49, 0.8), color 1*/
+/*rgba(236, 230, 196, 0.8), color 2*/
+/*rgba(12, 12, 4, 0.8), color 3*/
+
 #main{
-    -fx-background-image: url("../images/background.jpg");
+    -fx-background-image: url("../images/mainBackground.jpg");
 }
 
-#searchInput{
-    -fx-background-color: transparent;
-    -fx-text-inner-color: white;
-    -fx-prompt-text-fill: rgba(255, 255, 255, 0.5) ;
+#secondary{
+    -fx-background-image: url("../images/secondaryBackground.jpg");
 }
 
-#title{
-    -fx-background-color:  rgba(135,206,250, 0.5);
-}
-
-.text-field {
-    -fx-background-color: rgba(53,89,119,0.6);
-    -fx-text-inner-color: white;
-}
-
-.text-area {
-    -fx-background-color: rgba(53,89,119,0.6);
-    -fx-text-inner-color: white;
-}
-
-.text-area .scroll-pane {
+#listOfReferenceFiles{
     -fx-background-color: transparent;
 }
 
-.text-area .scroll-pane .viewport{
+#citationsText{
+    -fx-text-color: rgba(16, 27, 49, 0.8);
+}
+
+.list-cell {
+    -fx-text-fill: rgba(16, 27, 49, 0.8);
     -fx-background-color: transparent;
 }
 
-.text-area .scroll-pane .content{
+#descriptionTextArea {
+    -fx-text-inner-color: rgba(12, 12, 4, 0.8);
+}
+
+#originTextArea{
+     -fx-text-inner-color: rgba(236, 230, 196, 0.8);
+}
+
+#saveButton{
+    -fx-text-color: rgba(12, 12, 4, 0.8);
+}
+
+#switchToTranslationButton{
+    -fx-text-color: rgba(12, 12, 4, 0.8);
+}
+
+#descriptionTextArea.text-area, #originTextArea.text-area{
     -fx-background-color: transparent;
 }
+#descriptionTextArea.text-area .scroll-pane, #originTextArea.text-area .scroll-pane{
+    -fx-background-color: transparent;
+}
+
+#descriptionTextArea.text-area .scroll-pane .viewport, #originTextArea.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+#descriptionTextArea.text-area .scroll-pane .content, #originTextArea.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+/*#searchInput{*/
+    /*-fx-background-color: transparent;*/
+    /*-fx-text-inner-color: rgba(16, 27, 49, 0.8); /!*color 1*!/*/
+    /*-fx-prompt-text-fill: rgba(255, 255, 255, 0.5) ;*/
+/*}*/
+
+/*#originText{*/
+    /*-fx-background-color: transparent;*/
+    /*-fx-text-inner-color: rgba(236, 230, 196, 0.8); /!*color 1*!/*/
+/*}*/
+
+/*#title{*/
+    /*-fx-background-color:  rgba(135,206,250, 0.5);*/
+/*}*/

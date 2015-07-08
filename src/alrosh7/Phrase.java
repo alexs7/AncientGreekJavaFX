@@ -10,21 +10,19 @@ public class Phrase {
     private String value; // 1st field
     private String origin; //2nd field
     private String description; //3rd field
-    private String citation; //4th field
-    private ArrayList<String> files;
+    private ArrayList<String> citations;
     private String germanTranslation; //5th field
     private String frenchTranslation; //6th field
     private String uniqueID;
 
-    public Phrase(String value, String origin, String description, String citation, String germanTranslation, String frenchTranslation, String uniqueID) {
+    public Phrase(String value, String origin, String description, String germanTranslation, String frenchTranslation, String uniqueID) {
         this.value = value;
         this.origin = origin;
         this.description = description;
-        this.citation = citation;
         this.germanTranslation = germanTranslation;
         this.frenchTranslation = frenchTranslation;
         this.uniqueID = uniqueID;
-        this.files = new ArrayList<>();
+        this.citations = new ArrayList<>();
     }
 
     public String getUniqueID() {
@@ -59,24 +57,16 @@ public class Phrase {
         this.description = description;
     }
 
-    public String getCitation() {
-        return citation;
+    public ArrayList<String> getCitations() {
+        return citations;
     }
 
-    public void setCitation(String citation) {
-        this.citation = citation;
+    public void setCitations(ArrayList<String> citations) {
+        this.citations = citations;
     }
 
-    public ArrayList<String> getFiles() {
-        return files;
-    }
-
-    public void setFiles(ArrayList<String> files) {
-        this.files = files;
-    }
-
-    public void addToFiles(String fileLocation){
-        this.files.add(fileLocation);
+    public void addToCitations(String fileLocation){
+        this.citations.add(fileLocation);
     }
 
     public String getGermanTranslation() {
