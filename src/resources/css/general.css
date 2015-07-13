@@ -39,30 +39,17 @@
     -fx-text-color: rgba(12, 12, 4, 0.8);
 }
 
-#descriptionTextArea.text-area, #originTextArea.text-area{
+#descriptionTextArea.text-area, #originTextArea.text-area, #germanTextArea.text-area, #frenchTextArea.text-area{
     -fx-background-color: transparent;
 }
-#descriptionTextArea.text-area .scroll-pane, #originTextArea.text-area .scroll-pane{
+#descriptionTextArea.text-area .scroll-pane, #originTextArea.text-area .scroll-pane, #germanTextArea.text-area .scroll-pane, #frenchTextArea.text-area .scroll-pane{
     -fx-background-color: transparent;
 }
 
-#descriptionTextArea.text-area .scroll-pane .viewport, #originTextArea.text-area .scroll-pane .viewport{
+#descriptionTextArea.text-area .scroll-pane .viewport, #originTextArea.text-area .scroll-pane .viewport, #germanTextArea.text-area .scroll-pane .viewport, #frenchTextArea.text-area .scroll-pane .viewport{
     -fx-background-color: transparent;
 }
-#descriptionTextArea.text-area .scroll-pane .content, #originTextArea.text-area .scroll-pane .content{
+#descriptionTextArea.text-area .scroll-pane .content, #originTextArea.text-area .scroll-pane .content, #germanTextArea.text-area .scroll-pane .content, #frenchTextArea.text-area .scroll-pane .content{
     -fx-background-color: transparent;
 }
-/*#searchInput{*/
-    /*-fx-background-color: transparent;*/
-    /*-fx-text-inner-color: rgba(16, 27, 49, 0.8); /!*color 1*!/*/
-    /*-fx-prompt-text-fill: rgba(255, 255, 255, 0.5) ;*/
-/*}*/
 
-/*#originText{*/
-    /*-fx-background-color: transparent;*/
-    /*-fx-text-inner-color: rgba(236, 230, 196, 0.8); /!*color 1*!/*/
-/*}*/
-
-/*#title{*/
-    /*-fx-background-color:  rgba(135,206,250, 0.5);*/
-/*}*/

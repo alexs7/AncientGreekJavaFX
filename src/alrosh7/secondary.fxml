@@ -20,18 +20,23 @@
                     </font>
                 </TextField>
             </children></Pane>
-        <TextArea id="originTextArea" layoutX="12.0" layoutY="234.0" prefHeight="434.0" prefWidth="451.0" />
-        <TextArea id="referencesTextArea" layoutX="493.0" layoutY="236.0" prefHeight="434.0" prefWidth="461.0" />
-        <Text layoutX="806.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Αποθήκευση" wrappingWidth="106.7294921875">
+        <!--<Text layoutX="661.0" layoutY="206.0" onMouseClicked="#updatePhrase" strokeType="OUTSIDE" strokeWidth="0.0" text="Ενημέρωση" wrappingWidth="106.7294921875">-->
+            <!--<font>-->
+                <!--<Font size="16.0" />-->
+            <!--</font>-->
+        <!--</Text>-->
+        <Text  onMouseClicked="#updateOrCreatePhrase" layoutX="771.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Αποθήκευση" wrappingWidth="106.7294921875">
             <font>
                 <Font size="16.0" />
             </font>
         </Text>
-        <Text layoutX="919.0" layoutY="213.0" onMouseClicked="#switchToMainScene" strokeType="OUTSIDE" strokeWidth="0.0" text="GR" wrappingWidth="28.7294921875">
+        <Text layoutX="919.0" layoutY="206.0" onMouseClicked="#switchToMainScene" strokeType="OUTSIDE" strokeWidth="0.0" text="GR" wrappingWidth="28.7294921875">
             <font>
                 <Font size="16.0" />
             </font>
         </Text>
-      <TextArea layoutX="9.0" layoutY="125.0" prefHeight="93.0" prefWidth="451.0" />
+        <TextArea id="originTextArea" layoutX="13.0" layoutY="125.0" prefHeight="85.0" prefWidth="650.0" />
+      <TextArea id="germanTextArea" layoutX="14.0" layoutY="240.0" prefHeight="429.0" prefWidth="448.0" />
+      <TextArea id="frenchTextArea" layoutX="499.0" layoutY="240.0" prefHeight="429.0" prefWidth="448.0" />
     </children>
 </Pane>

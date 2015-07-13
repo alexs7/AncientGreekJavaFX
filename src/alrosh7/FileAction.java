@@ -4,6 +4,7 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -45,6 +46,17 @@ public class FileAction {
                 e.printStackTrace();
             }
             return null;
+        }
+    }
+
+    public void saveFile(JSONObject saveItem) {
+        try {
+            FileWriter fileToSave = new FileWriter(rootDirName + "/" + saveItem.get("uniqueID") + ".json");
+            fileToSave.write(saveItem.toJSONString());
+            fileToSave.flush();
+            fileToSave.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

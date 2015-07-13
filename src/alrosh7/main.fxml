@@ -20,13 +20,19 @@
                </font>
             </TextField>
          </children></Pane>
+      <TextArea id="originTextArea" layoutX="13.0" layoutY="125.0" prefHeight="85.0" prefWidth="650.0" />
       <TextArea id="descriptionTextArea" layoutX="12.0" layoutY="234.0" prefHeight="430.0" prefWidth="650.0" />
       <Text id="citationsText" layoutX="689.0" layoutY="254.0" onMouseClicked="#uploadFiles" strokeType="OUTSIDE" strokeWidth="0.0" text="Πηγές:" wrappingWidth="253.0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text id="saveButton" layoutX="771.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Αποθήκευση" wrappingWidth="106.7294921875">
+      <!--<Text layoutX="661.0" layoutY="206.0" onMouseClicked="#updatePhrase" strokeType="OUTSIDE" strokeWidth="0.0" text="Ενημέρωση" wrappingWidth="106.7294921875">-->
+         <!--<font>-->
+            <!--<Font size="16.0" />-->
+         <!--</font>-->
+      <!--</Text>-->
+      <Text layoutX="771.0" layoutY="206.0" onMouseClicked="#updateOrCreatePhrase" strokeType="OUTSIDE" strokeWidth="0.0" text="Αποθήκευση" wrappingWidth="106.7294921875">
          <font>
             <Font size="16.0" />
          </font>
@@ -36,7 +42,6 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <ListView id="listOfReferenceFiles" onMouseClicked="#openSelectedFiles" layoutX="690.0" layoutY="275.0" prefHeight="387.0" prefWidth="253.0" />
-      <TextArea id="originTextArea" layoutX="13.0" layoutY="125.0" prefHeight="85.0" prefWidth="650.0" />
+      <ListView id="listOfReferenceFiles" layoutX="690.0" layoutY="275.0" onMouseClicked="#openSelectedFiles" prefHeight="387.0" prefWidth="253.0" />
    </children>
 </Pane>
