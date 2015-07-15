@@ -42,6 +42,6 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <ListView id="listOfReferenceFiles" layoutX="690.0" layoutY="275.0" onMouseClicked="#openSelectedFiles" prefHeight="387.0" prefWidth="253.0" />
+      <ListView id="listOfCitationFiles" layoutX="690.0" layoutY="275.0" onMouseClicked="#openSelectedFiles" prefHeight="387.0" prefWidth="253.0" />
    </children>
 </Pane>

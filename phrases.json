@@ -1,0 +1,49 @@
+{
+  "phrases": [
+    {
+      "value": "fooV",
+      "origin": "fooOr",
+      "description": "fooD",
+      "citation": "fooCit",
+      "germanTranslation": "fooGerm",
+      "frenchTranslation": "fooFren",
+      "uniqueID": "fooUniq",
+      "files": [
+        {
+          "citation0": "/foo/bar0.png",
+          "citation1": "/foo/bar1.png"
+        }
+      ]
+    },
+    {
+      "value": "fooV",
+      "origin": "fooOr",
+      "description": "fooD",
+      "citation": "fooCit",
+      "germanTranslation": "fooGerm",
+      "frenchTranslation": "fooFren",
+      "uniqueID": "fooUniq",
+      "files": [
+        {
+          "citation0": "/foo/bar0.png",
+          "citation1": "/foo/bar1.png"
+        }
+      ]
+    },
+    {
+      "value": "fooV",
+      "origin": "fooOr",
+      "description": "fooD",
+      "citation": "fooCit",
+      "germanTranslation": "fooGerm",
+      "frenchTranslation": "fooFren",
+      "uniqueID": "fooUniq",
+      "files": [
+        {
+          "citation0": "/foo/bar0.png",
+          "citation1": "/foo/bar1.png"
+        }
+      ]
+    }
+  ]
+}

@@ -16,8 +16,12 @@ public class FileAction {
     private String objectsFileName;
 
     public FileAction(){
-        rootDirName = "/home/ar1v13/ancientGreekLocalDatabase";
+        rootDirName = "/home/alex/ancientGreekLocalDatabase";
         objectsFileName = rootDirName+"/phrases.json";
+    }
+
+    public String getRootDirName() {
+        return rootDirName;
     }
 
     public void createRootDir() {

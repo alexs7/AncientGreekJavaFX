@@ -1,5 +1,7 @@
 package alrosh7;
 
+import org.json.simple.JSONArray;
+
 import java.util.ArrayList;
 
 /**
@@ -15,7 +17,7 @@ public class Phrase {
     private String frenchTranslation; //6th field
     private String uniqueID;
 
-    public Phrase(String value, String origin, String description, String germanTranslation, String frenchTranslation, String uniqueID) {
+    public Phrase(String value, String origin, String description, String germanTranslation, String frenchTranslation, String uniqueID, JSONArray citations) {
         this.value = value;
         this.origin = origin;
         this.description = description;
@@ -23,6 +25,11 @@ public class Phrase {
         this.frenchTranslation = frenchTranslation;
         this.uniqueID = uniqueID;
         this.citations = new ArrayList<>();
+
+        for(Object citation : citations){
+            this.citations.add(citation.toString());
+        }
+
     }
 
     public String getUniqueID() {
