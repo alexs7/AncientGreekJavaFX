@@ -14,18 +14,15 @@
     <children>
         <Pane id="title" layoutY="-2.0" prefHeight="85.0" prefWidth="960.0">
             <children>
-                <TextField id="searchInput" layoutX="14.0" layoutY="8.0" prefHeight="47.0" prefWidth="935.0" promptText="Αναζήτηση">
-                    <font>
-                        <Font size="37.0" />
-                    </font>
-                </TextField>
+                <ComboBox id="searchInput" editable="true" layoutX="14.0" layoutY="8.0" onAction="#loadPhrase" prefHeight="103.0" prefWidth="935.0" promptText="Αναζήτηση">
+                </ComboBox>
             </children></Pane>
-        <!--<Text layoutX="661.0" layoutY="206.0" onMouseClicked="#updatePhrase" strokeType="OUTSIDE" strokeWidth="0.0" text="Ενημέρωση" wrappingWidth="106.7294921875">-->
-            <!--<font>-->
-                <!--<Font size="16.0" />-->
-            <!--</font>-->
-        <!--</Text>-->
-        <Text  onMouseClicked="#updateOrCreatePhrase" layoutX="771.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Αποθήκευση" wrappingWidth="106.7294921875">
+        <Text layoutX="696.0" layoutY="205.0" onMouseClicked="#cleanInputs" strokeType="OUTSIDE" strokeWidth="0.0" text="Εκκαθάριση">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Text>
+        <Text layoutX="802.0" layoutY="205.0" onMouseClicked="#updateOrCreatePhrase" strokeType="OUTSIDE" strokeWidth="0.0" text="Αποθήκευση" wrappingWidth="106.7294921875">
             <font>
                 <Font size="16.0" />
             </font>

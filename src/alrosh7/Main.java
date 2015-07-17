@@ -10,15 +10,18 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Init.loadPhrases(new FileAction().getRootDirName());
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
         Parent root = fxmlLoader.load();
 
         primaryStage.setTitle("Greek Phrases Database");
-        Init init = new Init();
 
         Scene mainScene = new Scene(root, 960, 679);
         primaryStage.setScene(mainScene);
@@ -30,8 +33,10 @@ public class Main extends Application {
         primaryStage.getIcons().add(ico);
         primaryStage.setResizable(false);
 
-        init.setTextAreasWrap(primaryStage);
-        init.setSearchFieldListener(primaryStage);
+        Init.setTextAreasWrap(primaryStage);
+        Init.setSearchFieldListener(primaryStage);
+
+        Init.setUpComboBox(primaryStage);
 
         primaryStage.show();
     }

@@ -14,11 +14,8 @@
    <children>
       <Pane id="title" layoutY="-2.0" prefHeight="85.0" prefWidth="960.0">
          <children>
-            <TextField id="searchInput" layoutX="14.0" layoutY="8.0" prefHeight="47.0" prefWidth="935.0" promptText="Αναζήτηση">
-               <font>
-                  <Font size="37.0" />
-               </font>
-            </TextField>
+            <ComboBox id="searchInput" editable="true" layoutX="14.0" layoutY="8.0" onAction="#loadPhrase" prefHeight="103.0" prefWidth="935.0" promptText="Αναζήτηση">
+            </ComboBox>
          </children></Pane>
       <TextArea id="originTextArea" layoutX="13.0" layoutY="125.0" prefHeight="85.0" prefWidth="650.0" />
       <TextArea id="descriptionTextArea" layoutX="12.0" layoutY="234.0" prefHeight="430.0" prefWidth="650.0" />
@@ -32,7 +29,7 @@
             <!--<Font size="16.0" />-->
          <!--</font>-->
       <!--</Text>-->
-      <Text layoutX="771.0" layoutY="206.0" onMouseClicked="#updateOrCreatePhrase" strokeType="OUTSIDE" strokeWidth="0.0" text="Αποθήκευση" wrappingWidth="106.7294921875">
+      <Text layoutX="771.0" layoutY="205.0" onMouseClicked="#updateOrCreatePhrase" strokeType="OUTSIDE" strokeWidth="0.0" text="Αποθήκευση" wrappingWidth="106.7294921875">
          <font>
             <Font size="16.0" />
          </font>
@@ -42,6 +39,11 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <ListView id="listOfCitationFiles" layoutX="690.0" layoutY="275.0" onMouseClicked="#openSelectedFiles" prefHeight="387.0" prefWidth="253.0" />
+      <ListView id="listOfCitationFilesListView" layoutX="690.0" layoutY="275.0" onMouseClicked="#openSelectedFiles" prefHeight="387.0" prefWidth="253.0" />
+      <Text layoutX="657.0" layoutY="205.0" onMouseClicked="#cleanInputs" strokeType="OUTSIDE" strokeWidth="0.0" text="Εκκαθάριση">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

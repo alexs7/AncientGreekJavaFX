@@ -10,7 +10,7 @@
     -fx-background-image: url("../images/secondaryBackground.jpg");
 }
 
-#listOfCitationFiles {
+#listOfCitationFilesListView {
     -fx-background-color: transparent;
 }
 
@@ -53,3 +53,14 @@
     -fx-background-color: transparent;
 }
 
+.combo-box-popup .list-view {
+    -fx-font-size : 15pt;
+}
+
+.combo-box .arrow, .combo-box .arrow-button{
+    -fx-background-color: transparent;
+}
+
+.combo-box .text-field {
+    -fx-background-color: transparent;
+}
