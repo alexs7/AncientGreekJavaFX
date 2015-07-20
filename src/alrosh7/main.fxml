@@ -17,19 +17,24 @@
             <ComboBox id="searchInput" editable="true" layoutX="14.0" layoutY="8.0" onAction="#loadPhrase" prefHeight="103.0" prefWidth="935.0" promptText="Αναζήτηση">
             </ComboBox>
          </children></Pane>
-      <TextArea id="originTextArea" layoutX="13.0" layoutY="125.0" prefHeight="85.0" prefWidth="650.0" />
+      <TextArea id="originTextArea" layoutX="13.0" layoutY="125.0" prefHeight="85.0" prefWidth="636.0" />
       <TextArea id="descriptionTextArea" layoutX="12.0" layoutY="234.0" prefHeight="430.0" prefWidth="650.0" />
       <Text id="citationsText" layoutX="689.0" layoutY="254.0" onMouseClicked="#uploadFiles" strokeType="OUTSIDE" strokeWidth="0.0" text="Πηγές:" wrappingWidth="253.0">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <!--<Text layoutX="661.0" layoutY="206.0" onMouseClicked="#updatePhrase" strokeType="OUTSIDE" strokeWidth="0.0" text="Ενημέρωση" wrappingWidth="106.7294921875">-->
-         <!--<font>-->
-            <!--<Font size="16.0" />-->
-         <!--</font>-->
-      <!--</Text>-->
       <Text layoutX="771.0" layoutY="205.0" onMouseClicked="#updateOrCreatePhrase" strokeType="OUTSIDE" strokeWidth="0.0" text="Αποθήκευση" wrappingWidth="106.7294921875">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="771.0" layoutY="180.0" onMouseClicked="#cleanInputs" strokeType="OUTSIDE" strokeWidth="0.0" text="Εκκαθάριση">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="771.0" onMouseClicked="#deletePhrase" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Διαγραφή">
          <font>
             <Font size="16.0" />
          </font>
@@ -39,11 +44,15 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <ListView id="listOfCitationFilesListView" layoutX="690.0" layoutY="275.0" onMouseClicked="#openSelectedFiles" prefHeight="387.0" prefWidth="253.0" />
-      <Text layoutX="657.0" layoutY="205.0" onMouseClicked="#cleanInputs" strokeType="OUTSIDE" strokeWidth="0.0" text="Εκκαθάριση">
+      <Text id="switchToGreekButton" layoutX="919.0" layoutY="206.0" onMouseClicked="#switchToMainScene" strokeType="OUTSIDE" strokeWidth="0.0" text="GR" visible="false" wrappingWidth="28.7294921875">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
+      <ListView id="listOfCitationFilesListView" layoutX="690.0" layoutY="275.0" onMouseClicked="#openSelectedFiles" prefHeight="387.0" prefWidth="253.0" />
+
+      <TextArea id="germanTextArea" layoutX="14.0" layoutY="240.0" prefHeight="429.0" prefWidth="448.0" visible="false" />
+      <TextArea id="frenchTextArea" layoutX="499.0" layoutY="240.0" prefHeight="429.0" prefWidth="448.0" visible="false" />
+
    </children>
 </Pane>

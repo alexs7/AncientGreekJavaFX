@@ -3,10 +3,7 @@ package alrosh7;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -28,7 +25,7 @@ import java.util.Observable;
 public class Init {
 
     public static ArrayList<Phrase> inMemoryPhrases;
-    public static ObservableList<String> comboBoxDataOL;
+    public static ObservableList<String> comboBoxDataOL = FXCollections.observableArrayList();
 
     public Init(){
 
@@ -88,51 +85,44 @@ public class Init {
     }
 
     public static void setUpComboBox(Stage stage) {
-        comboBoxDataOL = FXCollections.observableArrayList(Init.setPhrasesCombinedIDValues());
-
         ComboBox searchCombobox = (ComboBox) stage.getScene().lookup("#searchInput");
         searchCombobox.setStyle("-fx-font-size : 37pt");
         searchCombobox.setItems(comboBoxDataOL);
 
         searchCombobox.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
 
-            if (oldValue == "") { //reset
-                comboBoxDataOL = FXCollections.observableArrayList(Init.setPhrasesCombinedIDValues());
+            for (Phrase phrase : inMemoryPhrases){
+                if(comboBoxDataOL.size() < 6 && phrase.getValue().contains(newValue) && !phrase.isFound()){
+                    comboBoxDataOL.add(phrase.getValue());
+                    phrase.setFound(true);
+                }else{
+                    comboBoxDataOL.remove(phrase.getValue());
+                    phrase.setFound(false);
+                }
             }
 
-            String keyWord = newValue;
-            ArrayList<String> matchingStrings = new ArrayList<String>();
-            matchingStrings.add("bae");
-
-//            for (int i = 0; i <= comboBoxDataOL.size() - 1; i++) {
-//                String stringToCheck = comboBoxDataOL.get(i);
-//                if (matches(keyWord, stringToCheck) && matchingStrings.size() < 6) {
-//                    matchingStrings.add(comboBoxDataOL.get(i));
-//                }
-//            }
-
-//            ObservableList<String> matchingStringsOL = FXCollections.observableArrayList(matchingStrings); //THIS BREAKS IT
-//            searchCombobox.setItems(matchingStringsOL);
-
-            if (1 > 0 && !(newValue + oldValue).isEmpty()) {
+            if (!newValue.isEmpty()) {
                 searchCombobox.show();
             } else {
+                comboBoxDataOL.clear();
                 searchCombobox.hide();
+                resetPhrasesToNonFound();
             }
 
         });
     }
 
-    private static boolean matches(String keyWord, String stringToCheck) {
-        return stringToCheck.contains(keyWord);
+    private static void resetPhrasesToNonFound() {
+        for (Phrase phrase : inMemoryPhrases){
+            phrase.setFound(false);
+        }
     }
 
-    public static ArrayList<String> setPhrasesCombinedIDValues() {
-        ArrayList<String> comboBoxValues = new ArrayList<String>();
-        for (Phrase phrase : inMemoryPhrases){
-            String str = phrase.getValue();
-            comboBoxValues.add(str);
-        }
-        return comboBoxValues;
+    public static void popUpAlertDialog(String s) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Πληροφόρηση");
+        alert.setHeaderText(null);
+        alert.setContentText(s);
+        alert.showAndWait();
     }
 }

@@ -4,24 +4,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.awt.*;
 import javafx.scene.control.TextArea;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
@@ -29,11 +26,9 @@ public class MainController implements Initializable {
 
     private FileAction fileAction;
     private ListView<String> listOfCitationFilesListView;
-    //tempSaveVariables
     private static String value;
     private static String origin;
     private static String description;
-    private static ArrayList<String> citations;
     private static String germanTranslation;
     private static String frenchTranslation;
     private static String uniqueID;
@@ -47,74 +42,55 @@ public class MainController implements Initializable {
 
     @FXML
     private void switchToTranslation(MouseEvent mouseEvent) throws IOException {
-        Stage stageOfEvent = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = ((Node) mouseEvent.getSource()).getScene();
 
-        ComboBox valueText = (ComboBox) stageOfEvent.getScene().lookup("#searchInput");
-        TextArea originTA = (TextArea) stageOfEvent.getScene().lookup("#originTextArea");
-        TextArea descriptionTA = (TextArea) stageOfEvent.getScene().lookup("#descriptionTextArea");
+        TextArea descriptionTA = (TextArea) scene.lookup("#descriptionTextArea");
+        TextArea germanTA = (TextArea) scene.lookup("#germanTextArea");
+        TextArea frenchTA = (TextArea) scene.lookup("#frenchTextArea");
+        ListView listViewfiles = (ListView) scene.lookup("#listOfCitationFilesListView");
+        Text citationsText = (Text) scene.lookup ("#citationsText");
+        Text switchToTranslationButton = (Text) scene.lookup ("#switchToTranslationButton");
+        Text switchToGreekButton = (Text) scene.lookup ("#switchToGreekButton");
 
-        value = valueText.getEditor().getText();
-        origin = originTA.getText();
-        description = descriptionTA.getText();
-        citations = new ArrayList<String>(listOfCitationFilesItems);
+        descriptionTA.setVisible(false);
+        listViewfiles.setVisible(false);
+        citationsText.setVisible(false);
+        switchToTranslationButton.setVisible(false);
+        switchToGreekButton.setVisible(true);
+        germanTA.setVisible(true);
+        frenchTA.setVisible(true);
 
-        Parent root = FXMLLoader.load(getClass().getResource("secondary.fxml"));
-        Scene mainScene = new Scene(root, 960, 679);
-        stageOfEvent.setScene(mainScene);
-
-        Init.setTextAreasWrap(stageOfEvent);
-
-        //get the fields again from new scene
-        TextArea germanTA = (TextArea) mainScene.lookup("#germanTextArea");
-        TextArea frenchTA = (TextArea) mainScene.lookup("#frenchTextArea");
-        ComboBox valueTextTranslationScreen = (ComboBox) mainScene.lookup("#searchInput");
-        TextArea originTATranslationScreen = (TextArea) mainScene.lookup("#originTextArea");
-
-        valueTextTranslationScreen.getEditor().setText(value);
-        originTATranslationScreen.setText(origin);
-        germanTA.setText(germanTranslation);
-        frenchTA.setText(frenchTranslation);
-
-        Init.setUpComboBox(stageOfEvent);
+        String image = Main.class.getResource("../resources/images/secondaryBackground.jpg").toExternalForm();
+        scene.lookup("#main").setStyle("-fx-background-image: url('"+image+"');");
     }
 
     @FXML
     public void switchToMainScene(MouseEvent mouseEvent) throws IOException {
-        Stage stageOfEvent = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+        Scene scene = ((Node) mouseEvent.getSource()).getScene();
 
-        TextArea germanTA = (TextArea) stageOfEvent.getScene().lookup("#germanTextArea");
-        TextArea frenchTA = (TextArea) stageOfEvent.getScene().lookup("#frenchTextArea");
-        ComboBox valueText = (ComboBox) stageOfEvent.getScene().lookup("#searchInput");
-        TextArea originTA = (TextArea) stageOfEvent.getScene().lookup("#originTextArea");
+        TextArea descriptionTA = (TextArea) scene.lookup("#descriptionTextArea");
+        TextArea germanTA = (TextArea) scene.lookup("#germanTextArea");
+        TextArea frenchTA = (TextArea) scene.lookup("#frenchTextArea");
+        ListView listViewfiles = (ListView) scene.lookup("#listOfCitationFilesListView");
+        Text citationsText = (Text) scene.lookup ("#citationsText");
+        Text switchToTranslationButton = (Text) scene.lookup ("#switchToTranslationButton");
+        Text switchToGreekButton = (Text) scene.lookup ("#switchToGreekButton");
 
-        value = valueText.getEditor().getText();
-        origin = originTA.getText();
-        germanTranslation = germanTA.getText();
-        frenchTranslation = frenchTA.getText();
+        descriptionTA.setVisible(true);
+        listViewfiles.setVisible(true);
+        citationsText.setVisible(true);
+        switchToTranslationButton.setVisible(true);
+        switchToGreekButton.setVisible(false);
+        germanTA.setVisible(false);
+        frenchTA.setVisible(false);
 
-        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
-        Scene mainScene = new Scene(root, 960, 679);
-        stageOfEvent.setScene(mainScene);
-
-        Init.setTextAreasWrap(stageOfEvent);
-
-        //get the fields again from new scene
-        ComboBox valueTextMainScreen = (ComboBox) mainScene.lookup("#searchInput");
-        TextArea originTAMainScreen = (TextArea) mainScene.lookup("#originTextArea");
-        TextArea descriptionTAMainScreen = (TextArea) mainScene.lookup("#descriptionTextArea");
-
-        valueTextMainScreen.getEditor().setText(value);
-        originTAMainScreen.setText(origin);
-        descriptionTAMainScreen.setText(description);
-        setUpListView(mainScene); //this is needed as the list needs to be re initiated when switching between scenes
-        //Init.setUpComboBox(stageOfEvent);
+        String image = Main.class.getResource("../resources/images/mainBackground.jpg").toExternalForm();
+        scene.lookup("#main").setStyle("-fx-background-image: url('" + image + "');");
     }
 
     public void setUpListView(Scene scene) {
         listOfCitationFilesListView = (ListView<String>) scene.lookup("#listOfCitationFilesListView");
-        if(listOfCitationFilesListView != null) {
-            listOfCitationFilesListView.setItems(listOfCitationFilesItems);
-        }
+        listOfCitationFilesListView.setItems(listOfCitationFilesItems);
     }
 
     public void uploadFiles(MouseEvent mouseEvent) {
@@ -130,13 +106,12 @@ public class MainController implements Initializable {
         if(file !=null){
             listOfCitationFilesItems.add(file.getAbsolutePath());
         }
-        // add the file to the current phrase maybe have a "tempfiles" array and when user clicks save then save them.
     }
 
     public void openSelectedFiles(MouseEvent mouseEvent){
         ListView<String> listView = (ListView<String>) ((Node) mouseEvent.getSource()).getScene().lookup("#listOfCitationFilesListView");
 
-        String selectedFileString =  listView.getSelectionModel().getSelectedItem();
+        String selectedFileString = listView.getSelectionModel().getSelectedItem();
 
         if(selectedFileString == null) { return; }
 
@@ -162,9 +137,10 @@ public class MainController implements Initializable {
     public void updateOrCreatePhrase(Event event) {
         //if it does not exist
         boolean canSave = true;
+        setVariablesFromAnyViewComponentVisible(event);
 
         for(Phrase phrase : Init.inMemoryPhrases){
-            if(phrase.getValue() == value ){ canSave = false ; };
+            if(phrase.getValue().equals(value) ){ canSave = false ; };
         }
 
         if(canSave) {
@@ -178,15 +154,16 @@ public class MainController implements Initializable {
             saveItem.put("uniqueID", uniqueID);
             JSONArray files = new JSONArray();
 
-            if(citations != null) {
-                for (int i = 0; i < citations.size(); i++) {
-                    files.add(citations.get(i));
-                }
+            for(String reference : listOfCitationFilesItems){
+                files.add(reference);
             }
 
             saveItem.put("files", files);
             addPhraseToInMemoryPhrases(saveItem);
             fileAction.saveFile(saveItem);
+            Init.popUpAlertDialog("Αποθηκεύτηκε!");
+        }else{
+            Init.popUpAlertDialog("Αυτή η φράση ήδη υπάρχει! Δεν θα αποθηκευτεί");
         }
     }
 
@@ -204,11 +181,10 @@ public class MainController implements Initializable {
     }
 
     public void loadPhrase(Event event){
-        ComboBox searchCombobox = (ComboBox) ((Node) event.getSource()).getScene().lookup("#searchInput");
-        String selectedString = (String) searchCombobox.getSelectionModel().getSelectedItem();
+        Scene scene = ((Node) event.getSource()).getScene();
 
-        System.out.println("selectedString "+selectedString);
-        System.out.println("searchCombobox.getEditor().getText() " + searchCombobox.getEditor().getText());
+        ComboBox searchCombobox = (ComboBox) scene.lookup("#searchInput");
+        String selectedString = (String) searchCombobox.getSelectionModel().getSelectedItem();
 
         Phrase phraseToLoad = null;
         for (Phrase phrase : Init.inMemoryPhrases) {
@@ -216,71 +192,83 @@ public class MainController implements Initializable {
                 phraseToLoad = phrase;
             }
         }
-
-        if (phraseToLoad == null || event == null) {
-            System.out.println("Phrase/Event not found not loading one");
-        } else {
-            loadSelectedPhrase(phraseToLoad, event);
-        }
+        loadSelectedPhrase(phraseToLoad, event);
     }
 
     public void loadSelectedPhrase(Phrase phrase, Event event){ // get event from keyboard click
+
+        if(phrase == null) { return; };
+
+        Scene scene = ((Node) event.getSource()).getScene();
+
         value = phrase.getValue();
         origin = phrase.getOrigin();
         description = phrase.getDescription();
-        citations = phrase.getCitations();
         listOfCitationFilesItems.clear();
-        for(String citation : citations){
-            listOfCitationFilesItems.add(citation);
+        for(String reference : phrase.getReferences()){
+            listOfCitationFilesItems.add(reference);
         }
         germanTranslation = phrase.getGermanTranslation();
         frenchTranslation = phrase.getFrenchTranslation();
         uniqueID = phrase.getUniqueID();
 
-        //set all fields regarding on which screen you are
-        screenSetFields(event);
-    }
+        TextArea descriptionTA = (TextArea) scene.lookup("#descriptionTextArea");
+        TextArea germanTA = (TextArea) scene.lookup("#germanTextArea");
+        TextArea frenchTA = (TextArea) scene.lookup("#frenchTextArea");
+        TextArea originTA = (TextArea) scene.lookup("#originTextArea");
 
-    public void screenSetFields(Event event) {
-        Stage stageOfEvent = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        if(stageOfEvent != null) {
-            TextArea germanTA = (TextArea) stageOfEvent.getScene().lookup("#germanTextArea");
-            TextArea frenchTA = (TextArea) stageOfEvent.getScene().lookup("#frenchTextArea");
-            TextArea originTA = (TextArea) stageOfEvent.getScene().lookup("#originTextArea");
-            TextArea descriptionTA = (TextArea) stageOfEvent.getScene().lookup("#descriptionTextArea");
-            setUpListView(((Node) event.getSource()).getScene());
-
-            if(germanTA !=null){ germanTA.setText(germanTranslation); }
-            if(frenchTA !=null){ frenchTA.setText(frenchTranslation); }
-            if(originTA !=null){ originTA.setText(origin); }
-            if(descriptionTA !=null){ descriptionTA.setText(description); }
-        }
+        descriptionTA.setText(description);
+        germanTA.setText(germanTranslation);
+        frenchTA.setText(frenchTranslation);
+        originTA.setText(origin);
     }
 
     public void cleanInputs(Event event) {
-        Stage stageOfEvent = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        if(stageOfEvent != null) {
-            value = "";
-            origin = "";
-            description = "";
-            listOfCitationFilesItems.clear();
-            germanTranslation = "";
-            frenchTranslation = "";
-            uniqueID = "";
+        Scene scene = ((Node) event.getSource()).getScene();
 
-            //ComboBox searchInput = (ComboBox) stageOfEvent.getScene().lookup("#searchInput");
-            TextArea germanTA = (TextArea) stageOfEvent.getScene().lookup("#germanTextArea");
-            TextArea frenchTA = (TextArea) stageOfEvent.getScene().lookup("#frenchTextArea");
-            TextArea originTA = (TextArea) stageOfEvent.getScene().lookup("#originTextArea");
-            TextArea descriptionTA = (TextArea) stageOfEvent.getScene().lookup("#descriptionTextArea");
-            setUpListView(((Node) event.getSource()).getScene());
+        value = "";
+        origin = "";
+        description = "";
+        listOfCitationFilesItems.clear();
+        germanTranslation = "";
+        frenchTranslation = "";
+        uniqueID = "";
 
-            //if(searchInput != null){ searchInput.setValue(null); }
-            if(germanTA !=null){ germanTA.setText(germanTranslation); }
-            if(frenchTA !=null){ frenchTA.setText(frenchTranslation); }
-            if(originTA !=null){ originTA.setText(origin); }
-            if(descriptionTA !=null){ descriptionTA.setText(description); }
+        TextArea germanTA = (TextArea) scene.lookup("#germanTextArea");
+        TextArea frenchTA = (TextArea) scene.lookup("#frenchTextArea");
+        TextArea originTA = (TextArea) scene.lookup("#originTextArea");
+        TextArea descriptionTA = (TextArea) scene.lookup("#descriptionTextArea");
+
+        if(germanTA !=null){ germanTA.setText(germanTranslation); }
+        if(frenchTA !=null){ frenchTA.setText(frenchTranslation); }
+        if(originTA !=null){ originTA.setText(origin); }
+        if(descriptionTA !=null){ descriptionTA.setText(description); }
+    }
+
+    public void setVariablesFromAnyViewComponentVisible(Event event) {
+        Scene scence = ((Node) event.getSource()).getScene();
+
+        TextArea germanTA = (TextArea) scence.lookup("#germanTextArea");
+        TextArea frenchTA = (TextArea) scence.lookup("#frenchTextArea");
+        TextArea originTA = (TextArea) scence.lookup("#originTextArea");
+        TextArea descriptionTA = (TextArea) scence.lookup("#descriptionTextArea");
+        ComboBox searchInput = (ComboBox) scence.lookup("#searchInput");
+
+        if(searchInput != null){ value = searchInput.getEditor().getText(); }
+        if(germanTA !=null){ germanTranslation = germanTA.getText(); }
+        if(frenchTA !=null){ frenchTranslation = frenchTA.getText(); }
+        if(originTA !=null){  origin = originTA.getText(); }
+        if(descriptionTA !=null){ description = descriptionTA.getText(); }
+    }
+
+    public void deletePhrase(Event event) {
+        if(uniqueID != "") {
+            File fileToDelete = new File(fileAction.getRootDirName() + "/" + uniqueID + ".json");
+            if (fileToDelete.exists()) {
+                fileToDelete.delete();
+                Init.popUpAlertDialog("Διαγράφηκε!");
+                cleanInputs(event);
+            }
         }
     }
 }

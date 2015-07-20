@@ -12,26 +12,34 @@ public class Phrase {
     private String value; // 1st field
     private String origin; //2nd field
     private String description; //3rd field
-    private ArrayList<String> citations;
+    private ArrayList<String> references;
     private String germanTranslation; //5th field
     private String frenchTranslation; //6th field
     private String uniqueID;
+    public boolean found = false;
 
-    public Phrase(String value, String origin, String description, String germanTranslation, String frenchTranslation, String uniqueID, JSONArray citations) {
+    public Phrase(String value, String origin, String description, String germanTranslation, String frenchTranslation, String uniqueID, JSONArray references) {
         this.value = value;
         this.origin = origin;
         this.description = description;
         this.germanTranslation = germanTranslation;
         this.frenchTranslation = frenchTranslation;
         this.uniqueID = uniqueID;
-        this.citations = new ArrayList<>();
+        this.references = new ArrayList<>();
 
-        for(Object citation : citations){
-            this.citations.add(citation.toString());
+        for(Object citation : references){
+            this.references.add(citation.toString());
         }
 
     }
 
+    public boolean isFound() {
+        return found;
+    }
+
+    public void setFound(boolean found) {
+        this.found = found;
+    }
     public String getUniqueID() {
         return uniqueID;
     }
@@ -64,16 +72,16 @@ public class Phrase {
         this.description = description;
     }
 
-    public ArrayList<String> getCitations() {
-        return citations;
+    public ArrayList<String> getReferences() {
+        return references;
     }
 
-    public void setCitations(ArrayList<String> citations) {
-        this.citations = citations;
+    public void setReferences(ArrayList<String> references) {
+        this.references = references;
     }
 
     public void addToCitations(String fileLocation){
-        this.citations.add(fileLocation);
+        this.references.add(fileLocation);
     }
 
     public String getGermanTranslation() {

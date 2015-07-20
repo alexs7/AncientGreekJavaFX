@@ -35,7 +35,6 @@ public class Main extends Application {
 
         Init.setTextAreasWrap(primaryStage);
         Init.setSearchFieldListener(primaryStage);
-
         Init.setUpComboBox(primaryStage);
 
         primaryStage.show();
