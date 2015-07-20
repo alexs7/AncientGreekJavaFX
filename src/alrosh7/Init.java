@@ -36,20 +36,10 @@ public class Init {
         TextArea originTA = (TextArea) stage.getScene().lookup("#originTextArea");
         TextArea germanTA = (TextArea) stage.getScene().lookup("#germanTextArea");
         TextArea frenchTA = (TextArea) stage.getScene().lookup("#frenchTextArea");
-
-        //TextArea referencesTA = (TextArea) stage.getScene().lookup("#referencesTextArea");
-        //referencesTA.setWrapText(true);
         if(destinationTA != null){ destinationTA.setWrapText(true); }
         if(originTA != null){ originTA.setWrapText(true); }
         if(germanTA != null){ germanTA.setWrapText(true); }
         if(frenchTA != null){ frenchTA.setWrapText(true); }
-    }
-
-    public static void setSearchFieldListener(Stage stage) {
-//        TextField searchInputTF = (TextField) stage.getScene().lookup("#searchInput");
-//        searchInputTF.textProperty().addListener((observable, oldValue, newValue) -> {
-//
-//        });
     }
 
     public static ArrayList<Phrase> loadPhrases(String saveDir) {
@@ -90,32 +80,25 @@ public class Init {
         searchCombobox.setItems(comboBoxDataOL);
 
         searchCombobox.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
-
-            for (Phrase phrase : inMemoryPhrases){
-                if(comboBoxDataOL.size() < 6 && phrase.getValue().contains(newValue) && !phrase.isFound()){
-                    comboBoxDataOL.add(phrase.getValue());
-                    phrase.setFound(true);
-                }else{
-                    comboBoxDataOL.remove(phrase.getValue());
-                    phrase.setFound(false);
-                }
-            }
-
             if (!newValue.isEmpty()) {
+                comboBoxDataOL.clear();
+                for (Phrase phrase : inMemoryPhrases){
+                    System.out.println("Searching for..."+newValue);
+                    System.out.println("comboBoxDataOL sixe..."+comboBoxDataOL.size());
+                    if(comboBoxDataOL.size() < 6 && phrase.getValue().toLowerCase().contains(newValue.toLowerCase())){
+                        if(!comboBoxDataOL.contains(phrase.getValue())) {
+                            System.out.println("Adding phrase..."+phrase.getValue());
+                            comboBoxDataOL.add(phrase.getValue());
+                        }
+                    }
+                }
                 searchCombobox.show();
             } else {
+                System.out.println("Clearing data... 2");
                 comboBoxDataOL.clear();
                 searchCombobox.hide();
-                resetPhrasesToNonFound();
             }
-
         });
-    }
-
-    private static void resetPhrasesToNonFound() {
-        for (Phrase phrase : inMemoryPhrases){
-            phrase.setFound(false);
-        }
     }
 
     public static void popUpAlertDialog(String s) {

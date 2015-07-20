@@ -19,6 +19,7 @@ import javafx.scene.control.TextArea;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
@@ -137,7 +138,7 @@ public class MainController implements Initializable {
     public void updateOrCreatePhrase(Event event) {
         //if it does not exist
         boolean canSave = true;
-        setVariablesFromAnyViewComponentVisible(event);
+        setVariablesFromFields(event);
 
         for(Phrase phrase : Init.inMemoryPhrases){
             if(phrase.getValue().equals(value) ){ canSave = false ; };
@@ -245,7 +246,7 @@ public class MainController implements Initializable {
         if(descriptionTA !=null){ descriptionTA.setText(description); }
     }
 
-    public void setVariablesFromAnyViewComponentVisible(Event event) {
+    public void setVariablesFromFields(Event event) {
         Scene scence = ((Node) event.getSource()).getScene();
 
         TextArea germanTA = (TextArea) scence.lookup("#germanTextArea");
@@ -263,11 +264,20 @@ public class MainController implements Initializable {
 
     public void deletePhrase(Event event) {
         if(uniqueID != "") {
-            File fileToDelete = new File(fileAction.getRootDirName() + "/" + uniqueID + ".json");
-            if (fileToDelete.exists()) {
-                fileToDelete.delete();
-                Init.popUpAlertDialog("Διαγράφηκε!");
-                cleanInputs(event);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Πληροφόρηση");
+            alert.setHeaderText(null);
+            alert.setContentText("Να διαγραφεί?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                File fileToDelete = new File(fileAction.getRootDirName() + "/" + uniqueID + ".json");
+                if (fileToDelete.exists()) {
+                    fileToDelete.delete();
+                    Init.popUpAlertDialog("Διαγράφηκε!");
+                    cleanInputs(event);
+                }
             }
         }
     }
