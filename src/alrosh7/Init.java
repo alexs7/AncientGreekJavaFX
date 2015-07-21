@@ -1,5 +1,7 @@
 package alrosh7;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -75,30 +77,32 @@ public class Init {
     }
 
     public static void setUpComboBox(Stage stage) {
-        ComboBox searchCombobox = (ComboBox) stage.getScene().lookup("#searchInput");
-        searchCombobox.setStyle("-fx-font-size : 37pt");
-        searchCombobox.setItems(comboBoxDataOL);
+        try {
+            ComboBox searchCombobox = (ComboBox) stage.getScene().lookup("#searchInput");
+            searchCombobox.setStyle("-fx-font-size : 37pt");
+            searchCombobox.setItems(comboBoxDataOL);
 
-        searchCombobox.getEditor().textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.isEmpty()) {
-                comboBoxDataOL.clear();
-                for (Phrase phrase : inMemoryPhrases){
-                    System.out.println("Searching for..."+newValue);
-                    System.out.println("comboBoxDataOL sixe..."+comboBoxDataOL.size());
-                    if(comboBoxDataOL.size() < 6 && phrase.getValue().toLowerCase().contains(newValue.toLowerCase())){
-                        if(!comboBoxDataOL.contains(phrase.getValue())) {
-                            System.out.println("Adding phrase..."+phrase.getValue());
-                            comboBoxDataOL.add(phrase.getValue());
+            searchCombobox.getEditor().textProperty().addListener(new ChangeListener<String>() {
+                @Override
+                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                    if (!newValue.isEmpty()) {
+                        for (Phrase phrase : inMemoryPhrases) {
+                            if (comboBoxDataOL.size() < 6 && phrase.getValue().toLowerCase().contains(newValue.toLowerCase())) {
+                                if (!comboBoxDataOL.contains(phrase.getValue())) {
+                                    comboBoxDataOL.add(phrase.getValue());
+                                }
+                            }
                         }
+                        searchCombobox.show();
+                    } else {
+                        comboBoxDataOL.clear();
+                        searchCombobox.hide();
                     }
                 }
-                searchCombobox.show();
-            } else {
-                System.out.println("Clearing data... 2");
-                comboBoxDataOL.clear();
-                searchCombobox.hide();
-            }
-        });
+            });
+        }catch(Exception e){
+            System.out.println(e.toString());
+        };
     }
 
     public static void popUpAlertDialog(String s) {

@@ -15,7 +15,10 @@ public class FileAction {
     private String rootDirName;
 
     public FileAction(){
-        rootDirName = "/home/alex/ancientGreekLocalDatabase";
+        String homeDir = System.getProperty("user.home");
+        String seperator = System.getProperty("file.separator");
+        rootDirName = homeDir + seperator + "ancientGreekLocalDatabase";
+        System.out.println(rootDirName);
     }
 
     public String getRootDirName() {
@@ -37,6 +40,16 @@ public class FileAction {
             fileToSave.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public boolean deleteFile(String uniqueID){
+        File fileToDelete = new File(rootDirName + "/" + uniqueID + ".json");
+        if(fileToDelete.exists()) {
+            fileToDelete.delete();
+            return true;
+        }else{
+            return false;
         }
     }
 }

@@ -18,7 +18,9 @@ import org.json.simple.JSONObject;
 import javafx.scene.control.TextArea;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.UUID;
@@ -136,49 +138,62 @@ public class MainController implements Initializable {
     }
 
     public void updateOrCreatePhrase(Event event) {
-        //if it does not exist
-        boolean canSave = true;
         setVariablesFromFields(event);
+        if(!value.isEmpty()) {
+            boolean canSave = true;
 
-        for(Phrase phrase : Init.inMemoryPhrases){
-            if(phrase.getValue().equals(value) ){ canSave = false ; };
-        }
-
-        if(canSave) {
-            uniqueID = UUID.randomUUID().toString();
-            JSONObject saveItem = new JSONObject();
-            saveItem.put("value", value);
-            saveItem.put("origin", origin);
-            saveItem.put("description", description);
-            saveItem.put("germanTranslation", germanTranslation);
-            saveItem.put("frenchTranslation", frenchTranslation);
-            saveItem.put("uniqueID", uniqueID);
-            JSONArray files = new JSONArray();
-
-            for(String reference : listOfCitationFilesItems){
-                files.add(reference);
+            for(Phrase phrase : Init.inMemoryPhrases){
+                if(phrase.getValue().trim().equals(value) ){ canSave = false ; };
             }
+            if (canSave) { //save happens!
+                JSONObject saveItem = getJSONObjectToSave();
+                createFile(saveItem);
+                Init.popUpAlertDialog("Αποθηκεύτηκε!");
+            } else { //else updates happens!
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Πληροφόρηση");
+                alert.setHeaderText(null);
+                alert.setContentText("Αυτή η φράση ήδη υπάρχει! Θελετε να ενημερώσετε την υπάρχουσα φράση?");
 
-            saveItem.put("files", files);
-            addPhraseToInMemoryPhrases(saveItem);
-            fileAction.saveFile(saveItem);
-            Init.popUpAlertDialog("Αποθηκεύτηκε!");
+                Optional<ButtonType> result = alert.showAndWait();
+                if (result.get() == ButtonType.OK) {
+                    boolean deletion = fileAction.deleteFile(uniqueID);
+                    if(deletion) {
+                        //create new file
+                        JSONObject saveItem = getJSONObjectToSave();
+                        createFile(saveItem);
+                        Init.popUpAlertDialog("Ενημερώθηκε!");
+                    }
+                }
+            }
+            Init.loadPhrases(fileAction.getRootDirName());
         }else{
-            Init.popUpAlertDialog("Αυτή η φράση ήδη υπάρχει! Δεν θα αποθηκευτεί");
+            Init.popUpAlertDialog("Καταχωρήστε μια λέξη");
         }
     }
 
-    private void addPhraseToInMemoryPhrases(JSONObject saveItem) {
-        Phrase phrase = new Phrase(
-                saveItem.get("value") != null ? saveItem.get("value").toString() : "",
-                saveItem.get("origin") != null ? saveItem.get("origin").toString() : "",
-                saveItem.get("description") != null ? saveItem.get("description").toString() : "",
-                saveItem.get("germanTranslation") != null ? saveItem.get("germanTranslation").toString() : "",
-                saveItem.get("frenchTranslation") != null ? saveItem.get("frenchTranslation").toString() : "",
-                saveItem.get("uniqueID") != null ? saveItem.get("uniqueID").toString() : "",
-                (JSONArray) saveItem.get("files")
-        );
-        Init.inMemoryPhrases.add(phrase);
+    private void createFile(JSONObject saveItem) {
+        fileAction.saveFile(saveItem);
+    }
+
+
+    private JSONObject getJSONObjectToSave() {
+        uniqueID = UUID.randomUUID().toString();
+        JSONObject saveItem = new JSONObject();
+        saveItem.put("value", value);
+        saveItem.put("origin", origin);
+        saveItem.put("description", description);
+        saveItem.put("germanTranslation", germanTranslation);
+        saveItem.put("frenchTranslation", frenchTranslation);
+        saveItem.put("uniqueID", uniqueID);
+        JSONArray files = new JSONArray();
+
+        for(String reference : listOfCitationFilesItems){
+            files.add(reference);
+        }
+
+        saveItem.put("files", files);
+        return saveItem;
     }
 
     public void loadPhrase(Event event){
@@ -189,7 +204,7 @@ public class MainController implements Initializable {
 
         Phrase phraseToLoad = null;
         for (Phrase phrase : Init.inMemoryPhrases) {
-            if (phrase.getValue() == selectedString) {
+            if (phrase.getValue().equals(selectedString)) {
                 phraseToLoad = phrase;
             }
         }
@@ -255,7 +270,7 @@ public class MainController implements Initializable {
         TextArea descriptionTA = (TextArea) scence.lookup("#descriptionTextArea");
         ComboBox searchInput = (ComboBox) scence.lookup("#searchInput");
 
-        if(searchInput != null){ value = searchInput.getEditor().getText(); }
+        if(searchInput != null){ value = searchInput.getEditor().getText().trim(); }
         if(germanTA !=null){ germanTranslation = germanTA.getText(); }
         if(frenchTA !=null){ frenchTranslation = frenchTA.getText(); }
         if(originTA !=null){  origin = originTA.getText(); }
@@ -276,6 +291,11 @@ public class MainController implements Initializable {
                 if (fileToDelete.exists()) {
                     fileToDelete.delete();
                     Init.popUpAlertDialog("Διαγράφηκε!");
+                    for (Phrase phrase : Init.inMemoryPhrases) {
+                        if (phrase.getValue().equals(value)) {
+                            Init.inMemoryPhrases.remove(phrase);
+                        }
+                    }
                     cleanInputs(event);
                 }
             }

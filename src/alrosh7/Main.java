@@ -22,7 +22,6 @@ public class Main extends Application {
         Parent root = fxmlLoader.load();
 
         primaryStage.setTitle("Greek Phrases Database");
-
         Scene mainScene = new Scene(root, 960, 679);
         primaryStage.setScene(mainScene);
 
