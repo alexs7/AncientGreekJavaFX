@@ -18,7 +18,6 @@ public class FileAction {
         String homeDir = System.getProperty("user.home");
         String seperator = System.getProperty("file.separator");
         rootDirName = homeDir + seperator + "ancientGreekLocalDatabase";
-        System.out.println(rootDirName);
     }
 
     public String getRootDirName() {
