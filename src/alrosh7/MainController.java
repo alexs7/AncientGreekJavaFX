@@ -16,6 +16,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import javafx.scene.control.TextArea;
+
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -117,24 +119,21 @@ public class MainController implements Initializable {
         String selectedFileString = listView.getSelectionModel().getSelectedItem();
 
         if(selectedFileString == null) { return; }
-
-        //System.out.println(Desktop.isDesktopSupported());
         File fileToOpen = new File(selectedFileString);
-        System.out.println(fileToOpen.exists());
 
-//        if(!Desktop.isDesktopSupported()){
-//            System.out.println("Desktop is not supported");
-//            return;
-//        }
-//
-//        Desktop desktop = Desktop.getDesktop();
-//
-//        // after check if file exists and open it
-//        if(fileToOpen.exists()) try {
-//            desktop.open(fileToOpen);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        if(!Desktop.isDesktopSupported()){
+            System.out.println("Desktop is not supported");
+            return;
+        }else{
+            Desktop desktop = Desktop.getDesktop();
+            // after check if file exists and open it
+            if(fileToOpen.exists()) try {
+                desktop.open(fileToOpen);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     public void updateOrCreatePhrase(Event event) {
