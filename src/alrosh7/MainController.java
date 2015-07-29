@@ -65,7 +65,7 @@ public class MainController implements Initializable {
         germanTA.setVisible(true);
         frenchTA.setVisible(true);
 
-        String image = Main.class.getResource("../resources/images/secondaryBackground.jpg").toExternalForm();
+        String image = Main.class.getResource("/resources/images/secondaryBackground.jpg").toExternalForm();
         scene.lookup("#main").setStyle("-fx-background-image: url('"+image+"');");
     }
 
@@ -89,7 +89,7 @@ public class MainController implements Initializable {
         germanTA.setVisible(false);
         frenchTA.setVisible(false);
 
-        String image = Main.class.getResource("../resources/images/mainBackground.jpg").toExternalForm();
+        String image = Main.class.getResource("/resources/images/mainBackground.jpg").toExternalForm();
         scene.lookup("#main").setStyle("-fx-background-image: url('" + image + "');");
     }
 

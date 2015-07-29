@@ -22,7 +22,7 @@ public class Main extends Application {
         Parent root = fxmlLoader.load();
 
         primaryStage.setTitle("Greek Phrases Database");
-        Scene mainScene = new Scene(root, 960, 679);
+        Scene mainScene = new Scene(root, 957, 676);
         primaryStage.setScene(mainScene);
 
         MainController mainController = fxmlLoader.getController();
@@ -35,6 +35,7 @@ public class Main extends Application {
         Init.setTextAreasWrap(primaryStage);
         Init.setUpComboBox(primaryStage);
 
+        primaryStage.centerOnScreen();
         primaryStage.show();
     }
 
