@@ -12,12 +12,7 @@
 
 <Pane id="main" minHeight="679.0" minWidth="960.0" prefHeight="679.0" prefWidth="960.0" stylesheets="@../resources/css/general.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="alrosh7.MainController">
    <children>
-      <Pane id="title" layoutY="-2.0" prefHeight="85.0" prefWidth="960.0">
-         <children>
-            <ComboBox id="searchInput" editable="true" layoutX="14.0" layoutY="8.0" onAction="#loadPhrase" prefHeight="103.0" prefWidth="935.0" promptText="Αναζήτηση">
-            </ComboBox>
-         </children>
-      </Pane>
+      <Pane id="title" layoutY="-2.0" prefHeight="85.0" prefWidth="960.0" />
 
       <TextArea id="originTextArea" layoutX="13.0" layoutY="125.0" prefHeight="85.0" prefWidth="636.0" />
       <TextArea id="descriptionTextArea" layoutX="12.0" layoutY="234.0" prefHeight="430.0" prefWidth="650.0" />

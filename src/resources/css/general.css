@@ -52,21 +52,3 @@
 #descriptionTextArea.text-area .scroll-pane .content, #originTextArea.text-area .scroll-pane .content, #germanTextArea.text-area .scroll-pane .content, #frenchTextArea.text-area .scroll-pane .content{
     -fx-background-color: transparent;
 }
-
-.combo-box-popup .list-view {
-    -fx-font-size : 15pt;
-}
-
-.combo-box .arrow, .combo-box .arrow-button{
-    -fx-background-color: transparent;
-}
-
-.combo-box .text-field {
-    -fx-background-color: transparent;
-}
-
-.combo-box-base > .arrow-button > .arrow {
-    -fx-background-color: transparent;
-}
-
-

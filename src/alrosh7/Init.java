@@ -27,7 +27,6 @@ import java.util.Observable;
 public class Init {
 
     public static ArrayList<Phrase> inMemoryPhrases;
-    public static ObservableList<String> comboBoxDataOL = FXCollections.observableArrayList();
 
     public Init(){
 
@@ -74,35 +73,6 @@ public class Init {
 
         inMemoryPhrases = localPhrases;
         return localPhrases;
-    }
-
-    public static void setUpComboBox(Stage stage) {
-        try {
-            ComboBox searchCombobox = (ComboBox) stage.getScene().lookup("#searchInput");
-            searchCombobox.setStyle("-fx-font-size : 37pt");
-            searchCombobox.setItems(comboBoxDataOL);
-
-            searchCombobox.getEditor().textProperty().addListener(new ChangeListener<String>() {
-                @Override
-                public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                    if (!newValue.isEmpty()) {
-                        for (Phrase phrase : inMemoryPhrases) {
-                            if (comboBoxDataOL.size() < 6 && phrase.getValue().toLowerCase().contains(newValue.toLowerCase())) {
-                                if (!comboBoxDataOL.contains(phrase.getValue())) {
-                                    comboBoxDataOL.add(phrase.getValue());
-                                }
-                            }
-                        }
-                        searchCombobox.show();
-                    } else {
-                        comboBoxDataOL.clear();
-                        searchCombobox.hide();
-                    }
-                }
-            });
-        }catch(Exception e){
-            System.out.println(e.toString());
-        };
     }
 
     public static void popUpAlertDialog(String s) {

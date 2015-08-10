@@ -33,7 +33,6 @@ public class Main extends Application {
         primaryStage.setResizable(false);
 
         Init.setTextAreasWrap(primaryStage);
-        Init.setUpComboBox(primaryStage);
 
         primaryStage.centerOnScreen();
         primaryStage.show();

@@ -198,14 +198,11 @@ public class MainController implements Initializable {
     public void loadPhrase(Event event){
         Scene scene = ((Node) event.getSource()).getScene();
 
-        ComboBox searchCombobox = (ComboBox) scene.lookup("#searchInput");
-        String selectedString = (String) searchCombobox.getSelectionModel().getSelectedItem();
-
         Phrase phraseToLoad = null;
         for (Phrase phrase : Init.inMemoryPhrases) {
-            if (phrase.getValue().equals(selectedString)) {
-                phraseToLoad = phrase;
-            }
+//            if (phrase.getValue().equals(selectedString)) {
+//                phraseToLoad = phrase;
+//            }
         }
         loadSelectedPhrase(phraseToLoad, event);
     }
@@ -267,9 +264,7 @@ public class MainController implements Initializable {
         TextArea frenchTA = (TextArea) scence.lookup("#frenchTextArea");
         TextArea originTA = (TextArea) scence.lookup("#originTextArea");
         TextArea descriptionTA = (TextArea) scence.lookup("#descriptionTextArea");
-        ComboBox searchInput = (ComboBox) scence.lookup("#searchInput");
 
-        if(searchInput != null){ value = searchInput.getEditor().getText().trim(); }
         if(germanTA !=null){ germanTranslation = germanTA.getText(); }
         if(frenchTA !=null){ frenchTranslation = frenchTA.getText(); }
         if(originTA !=null){  origin = originTA.getText(); }
