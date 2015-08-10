@@ -12,7 +12,15 @@
 
 <Pane id="main" minHeight="679.0" minWidth="960.0" prefHeight="679.0" prefWidth="960.0" stylesheets="@../resources/css/general.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="alrosh7.MainController">
    <children>
-      <Pane id="title" layoutY="-2.0" prefHeight="85.0" prefWidth="960.0" />
+      <Pane id="title" layoutY="-2.0" prefHeight="85.0" prefWidth="960.0">
+         <children>
+            <TextField id="searchInput" layoutX="14.0" layoutY="8.0" prefHeight="103.0" prefWidth="935.0" promptText="Αναζήτηση">
+                    <font>
+                       <Font size="37.0" />
+                    </font>
+            </TextField>
+         </children>
+      </Pane>
 
       <TextArea id="originTextArea" layoutX="13.0" layoutY="125.0" prefHeight="85.0" prefWidth="636.0" />
       <TextArea id="descriptionTextArea" layoutX="12.0" layoutY="234.0" prefHeight="430.0" prefWidth="650.0" />
@@ -51,6 +59,7 @@
 
       <TextArea id="germanTextArea" layoutX="14.0" layoutY="240.0" prefHeight="429.0" prefWidth="448.0" visible="false" />
       <TextArea id="frenchTextArea" layoutX="499.0" layoutY="240.0" prefHeight="429.0" prefWidth="448.0" visible="false" />
+      <ListView id="searchResultsList" layoutX="227.0" layoutY="120.0" onMouseClicked="#loadPhrase" prefHeight="200.0" prefWidth="506.0" visible="false" />
 
    </children>
 </Pane>

@@ -10,6 +10,15 @@
     -fx-background-image: url("../images/secondaryBackground.jpg");
 }
 
+#searchInput{
+    -fx-background-color: rgba(53,89,119,0.6);
+    -fx-text-inner-color: white;
+}
+
+#searchResultsList {
+    -fx-background-color: rgba(53,89,119,0.7);
+}
+
 #listOfCitationFilesListView {
     -fx-background-color: transparent;
 }

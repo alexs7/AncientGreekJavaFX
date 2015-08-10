@@ -27,6 +27,8 @@ import java.util.Observable;
 public class Init {
 
     public static ArrayList<Phrase> inMemoryPhrases;
+    private static ObservableList<String> listViewData = FXCollections.observableArrayList();
+    private static final int ROW_HEIGHT = 24;
 
     public Init(){
 
@@ -81,5 +83,38 @@ public class Init {
         alert.setHeaderText(null);
         alert.setContentText(s);
         alert.showAndWait();
+    }
+
+    public static void setUpSearchTextField(Stage stage) {
+        TextField searchTextField = (TextField) stage.getScene().lookup("#searchInput");
+        ListView<String> resultsListView = (ListView<String>) stage.getScene().lookup("#searchResultsList");
+
+        searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("TextField Text Changed (newValue: " + newValue + ")");
+
+            if(!newValue.isEmpty()){
+
+                if(!resultsListView.isVisible()){
+                    resultsListView.setVisible(true);
+                }
+
+                for(Phrase phrase : inMemoryPhrases){
+                    if(phrase.getValue().contains(newValue.trim()) && listViewData.size() < 5){
+                        listViewData.add(phrase.getValue());
+                    }
+                }
+
+                resultsListView.setPrefHeight(listViewData.size() * ROW_HEIGHT + 2);
+            }else{
+                if(resultsListView.isVisible()){
+                    resultsListView.setVisible(false);
+                }
+            }
+        });
+    }
+
+    public static void setListViewSearchResults(Stage stage) {
+        ListView<String> resultsListView = (ListView<String>) stage.getScene().lookup("#searchResultsList");
+        resultsListView.setItems(listViewData);
     }
 }

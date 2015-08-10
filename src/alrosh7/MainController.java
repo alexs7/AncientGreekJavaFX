@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -196,13 +197,14 @@ public class MainController implements Initializable {
     }
 
     public void loadPhrase(Event event){
-        Scene scene = ((Node) event.getSource()).getScene();
+        ListView<String> listView = (ListView<String>) ((Node) event.getSource()).getScene().lookup("#searchResultsList");
+        String selectedFileString = listView.getSelectionModel().getSelectedItem();
 
         Phrase phraseToLoad = null;
         for (Phrase phrase : Init.inMemoryPhrases) {
-//            if (phrase.getValue().equals(selectedString)) {
-//                phraseToLoad = phrase;
-//            }
+            if (phrase.getValue().equals(selectedFileString)) {
+                phraseToLoad = phrase;
+            }
         }
         loadSelectedPhrase(phraseToLoad, event);
     }
@@ -264,7 +266,9 @@ public class MainController implements Initializable {
         TextArea frenchTA = (TextArea) scence.lookup("#frenchTextArea");
         TextArea originTA = (TextArea) scence.lookup("#originTextArea");
         TextArea descriptionTA = (TextArea) scence.lookup("#descriptionTextArea");
+        TextField searchInput = (TextField) scence.lookup("#searchInput");
 
+        if(searchInput != null){ value = searchInput.getText().trim(); }
         if(germanTA !=null){ germanTranslation = germanTA.getText(); }
         if(frenchTA !=null){ frenchTranslation = frenchTA.getText(); }
         if(originTA !=null){  origin = originTA.getText(); }
