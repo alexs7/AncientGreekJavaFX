@@ -116,25 +116,30 @@ public class MainController implements Initializable {
 
     public void openSelectedFiles(MouseEvent mouseEvent){
         ListView<String> listView = (ListView<String>) ((Node) mouseEvent.getSource()).getScene().lookup("#listOfCitationFilesListView");
-
         String selectedFileString = listView.getSelectionModel().getSelectedItem();
 
-        if(selectedFileString == null) { return; }
-        File fileToOpen = new File(selectedFileString);
-
-        if(!Desktop.isDesktopSupported()){
-            System.out.println("Desktop is not supported");
+        if (selectedFileString == null) {
             return;
-        }else{
-            Desktop desktop = Desktop.getDesktop();
-            // after check if file exists and open it
-            if(fileToOpen.exists()) try {
-                desktop.open(fileToOpen);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
 
+        if(mouseEvent.getButton().name() == "SECONDARY"){
+            listOfCitationFilesItems.remove(selectedFileString);
+        }else {
+            File fileToOpen = new File(selectedFileString);
+
+            if (!Desktop.isDesktopSupported()) {
+                System.out.println("Desktop is not supported");
+                return;
+            } else {
+                Desktop desktop = Desktop.getDesktop();
+                // after check if file exists and open it
+                if (fileToOpen.exists()) try {
+                    desktop.open(fileToOpen);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     public void updateOrCreatePhrase(Event event) {
@@ -252,21 +257,23 @@ public class MainController implements Initializable {
         TextArea frenchTA = (TextArea) scene.lookup("#frenchTextArea");
         TextArea originTA = (TextArea) scene.lookup("#originTextArea");
         TextArea descriptionTA = (TextArea) scene.lookup("#descriptionTextArea");
+        TextField searchInput = (TextField) scene.lookup("#searchInput");
 
         if(germanTA !=null){ germanTA.setText(germanTranslation); }
         if(frenchTA !=null){ frenchTA.setText(frenchTranslation); }
         if(originTA !=null){ originTA.setText(origin); }
         if(descriptionTA !=null){ descriptionTA.setText(description); }
+        if(searchInput != null){ searchInput.setText(value); }
     }
 
     public void setVariablesFromFields(Event event) {
-        Scene scence = ((Node) event.getSource()).getScene();
+        Scene scene = ((Node) event.getSource()).getScene();
 
-        TextArea germanTA = (TextArea) scence.lookup("#germanTextArea");
-        TextArea frenchTA = (TextArea) scence.lookup("#frenchTextArea");
-        TextArea originTA = (TextArea) scence.lookup("#originTextArea");
-        TextArea descriptionTA = (TextArea) scence.lookup("#descriptionTextArea");
-        TextField searchInput = (TextField) scence.lookup("#searchInput");
+        TextArea germanTA = (TextArea) scene.lookup("#germanTextArea");
+        TextArea frenchTA = (TextArea) scene.lookup("#frenchTextArea");
+        TextArea originTA = (TextArea) scene.lookup("#originTextArea");
+        TextArea descriptionTA = (TextArea) scene.lookup("#descriptionTextArea");
+        TextField searchInput = (TextField) scene.lookup("#searchInput");
 
         if(searchInput != null){ value = searchInput.getText().trim(); }
         if(germanTA !=null){ germanTranslation = germanTA.getText(); }
