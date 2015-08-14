@@ -234,11 +234,13 @@ public class MainController implements Initializable {
         TextArea germanTA = (TextArea) scene.lookup("#germanTextArea");
         TextArea frenchTA = (TextArea) scene.lookup("#frenchTextArea");
         TextArea originTA = (TextArea) scene.lookup("#originTextArea");
+        TextField searchInput = (TextField) scene.lookup("#searchInput");
 
         descriptionTA.setText(description);
         germanTA.setText(germanTranslation);
         frenchTA.setText(frenchTranslation);
         originTA.setText(origin);
+        searchInput.setText(value);
 
         Init.clearListViewData();
     }

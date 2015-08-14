@@ -19,6 +19,11 @@
     -fx-background-color: rgba(53,89,119,0.7);
 }
 
+#searchResultsList .list-cell {
+    -fx-text-fill: rgba(16, 27, 49, 0.8);
+    -fx-background-color: transparent;
+}
+
 #listOfCitationFilesListView {
     -fx-background-color: transparent;
 }
@@ -27,7 +32,7 @@
     -fx-text-color: rgba(16, 27, 49, 0.8);
 }
 
-.list-cell {
+#listOfCitationFilesListView .list-cell {
     -fx-text-fill: rgba(16, 27, 49, 0.8);
     -fx-background-color: transparent;
 }
