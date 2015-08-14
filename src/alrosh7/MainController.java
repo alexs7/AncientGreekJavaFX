@@ -43,7 +43,6 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         fileAction = new FileAction();
-        fileAction.createRootDir();
     }
 
     @FXML
@@ -240,6 +239,8 @@ public class MainController implements Initializable {
         germanTA.setText(germanTranslation);
         frenchTA.setText(frenchTranslation);
         originTA.setText(origin);
+
+        Init.clearListViewData();
     }
 
     public void cleanInputs(Event event) {

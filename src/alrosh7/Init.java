@@ -27,6 +27,7 @@ import java.util.Observable;
 public class Init {
 
     public static ArrayList<Phrase> inMemoryPhrases;
+    private static ListView<String> resultsListView;
     private static ObservableList<String> listViewData = FXCollections.observableArrayList();
     private static final int ROW_HEIGHT = 24;
 
@@ -87,30 +88,54 @@ public class Init {
 
     public static void setUpSearchTextField(Stage stage) {
         TextField searchTextField = (TextField) stage.getScene().lookup("#searchInput");
-        ListView<String> resultsListView = (ListView<String>) stage.getScene().lookup("#searchResultsList");
+        resultsListView = (ListView<String>) stage.getScene().lookup("#searchResultsList");
+        FileAction fileAction = new FileAction();
 
         searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+
+            if (oldValue.length() == 0) { //if the user has first typed load all phrases
+                System.out.println("Loading phrases...");
+                loadPhrases(fileAction.getRootDirName());
+            }
+
             System.out.println("TextField Text Changed (newValue: " + newValue + ")");
 
-            if(!newValue.isEmpty()){
+            if (!newValue.isEmpty()) {
 
-                if(!resultsListView.isVisible()){
+                listViewData.clear();
+
+                if (!resultsListView.isVisible()) {
                     resultsListView.setVisible(true);
                 }
 
-                for(Phrase phrase : inMemoryPhrases){
-                    if(phrase.getValue().contains(newValue.trim()) && listViewData.size() < 5){
-                        listViewData.add(phrase.getValue());
-                    }
-                }
+                ArrayList<String> foundPhrases = findMaxFivePhrasesThatContainString(newValue, inMemoryPhrases);
+                listViewData.addAll(foundPhrases);
+
 
                 resultsListView.setPrefHeight(listViewData.size() * ROW_HEIGHT + 2);
-            }else{
-                if(resultsListView.isVisible()){
+            } else {
+                if (resultsListView.isVisible()) {
                     resultsListView.setVisible(false);
                 }
             }
         });
+    }
+
+    private static ArrayList<String> findMaxFivePhrasesThatContainString(String str, ArrayList<Phrase> inMemoryPhrases) {
+        ArrayList<String> foundPhrases = new ArrayList<String>();
+
+        for(Phrase phrase : inMemoryPhrases){
+            if(phrase.getValue().contains(str) && foundPhrases.size() < 5){
+                foundPhrases.add(phrase.getValue());
+            }
+        }
+
+        return foundPhrases;
+    }
+
+    public static void clearListViewData(){
+        listViewData.clear();
+        resultsListView.setVisible(false);
     }
 
     public static void setListViewSearchResults(Stage stage) {

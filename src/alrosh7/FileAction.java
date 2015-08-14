@@ -18,17 +18,15 @@ public class FileAction {
         String homeDir = System.getProperty("user.home");
         String seperator = System.getProperty("file.separator");
         rootDirName = homeDir + seperator + "ancientGreekLocalDatabase";
-    }
 
-    public String getRootDirName() {
-        return rootDirName;
-    }
-
-    public void createRootDir() {
         File rootDir = new File(rootDirName);
         if(!rootDir.exists()){
             rootDir.mkdirs();
         }
+    }
+
+    public String getRootDirName() {
+        return rootDirName;
     }
 
     public void saveFile(JSONObject saveItem) {
