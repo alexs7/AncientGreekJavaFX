@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -95,6 +96,21 @@ public class MainController implements Initializable {
 
     public void setUpListView(Scene scene) {
         listOfCitationFilesListView = (ListView<String>) scene.lookup("#listOfCitationFilesListView");
+        listOfCitationFilesListView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+
+            @Override
+            public ListCell<String> call(ListView<String> param) {
+                return new ListCell<String>() {
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        setPrefWidth(listOfCitationFilesListView.getPrefWidth());
+                        setWrapText(true);
+                        setText(item);
+                        super.updateItem(item, empty);
+                    }
+                };
+            }
+        });
         listOfCitationFilesListView.setItems(listOfCitationFilesItems);
     }
 

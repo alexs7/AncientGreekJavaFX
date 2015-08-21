@@ -16,11 +16,11 @@
 }
 
 #searchResultsList {
-    -fx-background-color: rgba(53,89,119,0.7);
+    -fx-background-color: rgba(53,89,119,0.85);
 }
 
 #searchResultsList .list-cell {
-    -fx-text-fill: rgba(16, 27, 49, 0.8);
+    -fx-text-fill: whitesmoke;
     -fx-background-color: transparent;
 }
 
