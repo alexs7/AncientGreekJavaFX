@@ -14,8 +14,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -55,9 +55,15 @@ public class Init {
         if (phrasesFile != null) {
             for (File file : phrasesFile) {
                 try {
-                    byte[] encoded = Files.readAllBytes(Paths.get(file.getAbsolutePath()));
-                    String jsonFileString = new String(encoded);
-                    JSONObject jsonPhrase = (JSONObject) new JSONParser().parse(jsonFileString);
+                    StringBuilder builder = new StringBuilder();
+                    String aux = "";
+                    BufferedReader reader = new BufferedReader(new InputStreamReader( new FileInputStream(file.getAbsolutePath()), StandardCharsets.UTF_8));
+                    while ((aux = reader.readLine()) != null) {
+                        builder.append(aux);
+                    }
+                    String stringFromFile = builder.toString();
+
+                    JSONObject jsonPhrase = (JSONObject) new JSONParser().parse(stringFromFile);
                     Phrase phrase = new Phrase(
                             jsonPhrase.get("value") != null ? jsonPhrase.get("value").toString() : "",
                             jsonPhrase.get("origin") != null ? jsonPhrase.get("origin").toString() : "",
@@ -92,13 +98,9 @@ public class Init {
         FileAction fileAction = new FileAction();
 
         searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-
             if (oldValue.length() == 0) { //if the user has first typed load all phrases
-                System.out.println("Loading phrases...");
                 loadPhrases(fileAction.getRootDirName());
             }
-
-            System.out.println("TextField Text Changed (newValue: " + newValue + ")");
 
             if (!newValue.isEmpty()) {
 

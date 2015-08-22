@@ -2,10 +2,8 @@ package alrosh7;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by alex on 05/07/15.
@@ -31,7 +29,8 @@ public class FileAction {
 
     public void saveFile(JSONObject saveItem) {
         try {
-            FileWriter fileToSave = new FileWriter(rootDirName + "/" + saveItem.get("uniqueID") + ".json");
+            BufferedWriter fileToSave = new BufferedWriter(
+                    new OutputStreamWriter(new FileOutputStream(rootDirName + "/" + saveItem.get("uniqueID") + ".json"),  StandardCharsets.UTF_8));
             fileToSave.write(saveItem.toJSONString());
             fileToSave.flush();
             fileToSave.close();
