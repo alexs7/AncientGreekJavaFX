@@ -42,7 +42,9 @@
 }
 
 #originTextArea{
-     -fx-text-inner-color: rgba(236, 230, 196, 0.8);
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-inner-color: rgba(236, 230, 196, 0.8);
 }
 
 #saveButton{
